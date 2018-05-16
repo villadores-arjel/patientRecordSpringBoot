@@ -1,0 +1,8 @@
+com\jelproject\patientrecord\model\Patient.class
+com\jelproject\patientrecord\configuration\HibernateConfiguration.class
+com\jelproject\patientrecord\SpringBootStandAloneAppRunner.class
+com\jelproject\patientrecord\dao\PatientRepository.class
+com\jelproject\patientrecord\service\PatientService.class
+com\jelproject\patientrecord\service\PatientServiceImpl.class
+com\jelproject\patientrecord\controller\PatientMVCController.class
+com\jelproject\patientrecord\controller\PatientRestController.class
