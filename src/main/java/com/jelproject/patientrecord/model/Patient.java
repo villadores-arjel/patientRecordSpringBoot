@@ -37,8 +37,20 @@ public class Patient
 	private String lastName;
 	
 	@Column(name="MIDDLE_NAME")
-	@Size(max=35)
+	@Size(max=35, message="Middle name should not be more than {max} characters")
 	private String midName;
+	
+	@Column(name="ADDRESS")
+	@Size(max=255)
+	private String address;
+	
+	@Column(name="CONTACT_NUMBER")
+	private Long contactNumber;
+	
+	private char gender;
+	
+	@Column(name="EMAIL_ADDRESS")
+	private String emailAdd;
 	
 	@Column(name="BIRTH_DATE")
 	@Temporal(TemporalType.DATE)
@@ -61,6 +73,38 @@ public class Patient
 		this.birthDate = bday;
 	}
 	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Long getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(Long contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public char getGender() {
+		return gender;
+	}
+
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
+
+	public String getEmailAdd() {
+		return emailAdd;
+	}
+
+	public void setEmailAdd(String emailAdd) {
+		this.emailAdd = emailAdd;
+	}
+
 	public long getId() 
 	{
 		return id;

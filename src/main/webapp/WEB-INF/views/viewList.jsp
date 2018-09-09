@@ -11,16 +11,36 @@
 		<h1>List of Patients</h1>
 		<hr />
 		<p align="right"><a href="<c:url value="/home" />">HOME</a></p>
-		<c:forEach items="${patientList}" var="patient" >
 			<div class="patients">
 				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>First Name</th>
+							<th>Middle Name</th>
+							<th>Last Name</th>
+							<th>Email Address</th>
+							<th>Address</th>
+							<th>Contact Number</th>
+							<th>Gender</th>
+							<th>Date of Birth</th>
+						</tr>
+					</thead>
+					<c:forEach items="${patientList}" var="patient" >
 					<tr>
 						<td><c:out value="${patient.id}" /></td>
 						<td><c:out value="${patient.firstName}" /></td>
+						<td><c:out value="${ patient.midName }" /></td>
 						<td><c:out value="${patient.lastName}" /></td>
+						<td><c:out value="${ patient.emailAdd }" /></td>
+						<td><c:out value="${ patient.address }" /></td>
+						<td><c:out value="${ patient.contactNumber }" /></td>
+						<td><c:out value="${ patient.gender }"/></td>
+						<td><c:out value="${ patient.birthDate }" /></td>
 					</tr>
+					</c:forEach>
 				</table>
 			</div>
-		</c:forEach>
+		
 	</body>
 </html>

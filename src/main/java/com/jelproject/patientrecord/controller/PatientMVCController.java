@@ -1,13 +1,18 @@
 package com.jelproject.patientrecord.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +31,13 @@ public class PatientMVCController {
 	public PatientMVCController(PatientService patientService)
 	{
 		this.patientService = patientService;
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder)
+	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		binder.registerCustomEditor(Date.class, "birthDate", new CustomDateEditor(dateFormat, false));
 	}
 	
 	@RequestMapping(value="/home", method = RequestMethod.GET)
