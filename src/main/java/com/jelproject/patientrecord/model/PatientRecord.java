@@ -1,5 +1,6 @@
 package com.jelproject.patientrecord.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,7 +40,7 @@ public class PatientRecord
 	@Size(min=1, max=100)
 	private String description;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "PATIENT_ID", nullable = false)
 	@JsonIgnore
 	private Patient patient;

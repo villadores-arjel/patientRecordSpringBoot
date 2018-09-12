@@ -1,12 +1,16 @@
 package com.jelproject.patientrecord.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -57,8 +61,8 @@ public class Patient
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date birthDate;
 	
-//	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-//	private Set<PatientRecord> record = new HashSet<>();
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+	private Set<PatientRecord> record = new HashSet<>();
 	
 	public Patient()
 	{
@@ -144,11 +148,13 @@ public class Patient
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-//	public Set<PatientRecord> getRecord() {
-//		return record;
-//	}
-//	public void setRecord(Set<PatientRecord> record) {
-//		this.record = record;
-//	}
+	
+	public Set<PatientRecord> getRecord() {
+		return record;
+	}
+	
+	public void setRecord(Set<PatientRecord> record) {
+		this.record = record;
+	}
 	
 }

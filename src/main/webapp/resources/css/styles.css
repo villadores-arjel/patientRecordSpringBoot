@@ -1,0 +1,43 @@
+@charset "ISO-8859-1";
+
+.patients
+{
+	width: 100%;
+}
+
+.customTable
+{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.customTable td, 
+.customTable th 
+{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.customTable tr
+{
+	text-align: center;
+}
+
+.customTable tr:nth-child(even)
+{
+	background-color: #f2f2f2;
+}
+
+.customTable tr:hover
+{
+	background-color: #ddd;
+}
+
+.customTable th 
+{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+}
