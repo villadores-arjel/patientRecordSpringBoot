@@ -34,10 +34,16 @@
         </dependency>
 
         <!-- Oracle JDBC driver -->
-        <dependency>
+        <!--  <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc7</artifactId>
             <version>12.1.0.1</version>
+        </dependency> -->
+        
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.31</version>
         </dependency>
 
         <!-- HikariCP connection pool -->
@@ -73,6 +79,12 @@
 	        <artifactId>hibernate-validator</artifactId>
 	        <version>4.2.0.Final</version>
 	    </dependency>
+	    
+	    <!-- Thymeleaf -->
+	    <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
     	
   </dependencies>
   

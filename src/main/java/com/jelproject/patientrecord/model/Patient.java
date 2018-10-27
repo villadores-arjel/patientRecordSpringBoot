@@ -7,11 +7,13 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,8 +27,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Patient 
 {
 	@Id
-	@SequenceGenerator(name="patientSeqGen", sequenceName="PATIENT_ID_SEQ", allocationSize = 1)
-	@GeneratedValue(generator="patientSeqGen", strategy=GenerationType.SEQUENCE)
+//	@SequenceGenerator(name="patientSeqGen", sequenceName="PATIENT_ID_SEQ", allocationSize = 1)
+//	@GeneratedValue(generator="patientSeqGen", strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="PATIENT_ID")
 	private long id;
 	
@@ -51,7 +54,10 @@ public class Patient
 	@Column(name="CONTACT_NUMBER")
 	private Long contactNumber;
 	
-	private char gender;
+	@NotNull(message="Select a gender")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="GENDER_ID")
+	private Gender gender;
 	
 	@Column(name="EMAIL_ADDRESS")
 	private String emailAdd;
@@ -93,11 +99,11 @@ public class Patient
 		this.contactNumber = contactNumber;
 	}
 
-	public char getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(char gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 

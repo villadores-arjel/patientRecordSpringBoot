@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jelproject.patientrecord.dao.GenderRepository;
 import com.jelproject.patientrecord.model.Patient;
 import com.jelproject.patientrecord.service.PatientService;
 
@@ -26,6 +27,9 @@ import com.jelproject.patientrecord.service.PatientService;
 public class PatientMVCController {
 	
 	private PatientService patientService;
+	
+	@Autowired
+	private GenderRepository genderRepository;
 	
 	@Autowired
 	public PatientMVCController(PatientService patientService)
@@ -44,14 +48,16 @@ public class PatientMVCController {
 	public String showHome(Model model)
 	{
 		model.addAttribute("patient", new Patient());
+		model.addAttribute("genderList", genderRepository.findAll());
 		return "home";
 	}
 	
 	@RequestMapping(value="/home", method = RequestMethod.POST)
-	public String addPatient(@ModelAttribute("patient") @Valid  Patient patient, BindingResult bindingResult)
+	public String addPatient(@ModelAttribute("patient") @Valid  Patient patient, BindingResult bindingResult, Model model)
 	{
 		if(bindingResult.hasErrors())
 		{
+			model.addAttribute("genderList", genderRepository.findAll());
 			return "home";
 		}
 		Patient response = patientService.add(patient);

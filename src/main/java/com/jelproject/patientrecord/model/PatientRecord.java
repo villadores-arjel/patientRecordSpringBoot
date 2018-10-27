@@ -24,8 +24,9 @@ public class PatientRecord
 {
 	
 	@Id
-	@SequenceGenerator(name="recordSeqGen", sequenceName="PATIENT_RECORD_ID_SEQ", allocationSize = 1)
-	@GeneratedValue(generator="recordSeqGen", strategy=GenerationType.SEQUENCE)
+//	@SequenceGenerator(name="recordSeqGen", sequenceName="PATIENT_RECORD_ID_SEQ", allocationSize = 1)
+//	@GeneratedValue(generator="recordSeqGen", strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="RECORD_ID")
 	private long id;
 	
