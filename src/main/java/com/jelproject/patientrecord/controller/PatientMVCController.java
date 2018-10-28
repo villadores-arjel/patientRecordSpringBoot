@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jelproject.patientrecord.dao.GenderRepository;
 import com.jelproject.patientrecord.model.Patient;
+import com.jelproject.patientrecord.model.dto.PatientDTO;
 import com.jelproject.patientrecord.service.PatientService;
 
 @Controller
@@ -41,26 +42,26 @@ public class PatientMVCController {
 	public void initBinder(WebDataBinder binder)
 	{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-		binder.registerCustomEditor(Date.class, "birthDate", new CustomDateEditor(dateFormat, false));
+		binder.registerCustomEditor(Date.class, "patient.birthDate", new CustomDateEditor(dateFormat, false));
 	}
 	
 	@RequestMapping(value="/home", method = RequestMethod.GET)
 	public String showHome(Model model)
 	{
-		model.addAttribute("patient", new Patient());
+		model.addAttribute("patient", new PatientDTO());
 		model.addAttribute("genderList", genderRepository.findAll());
 		return "home";
 	}
 	
 	@RequestMapping(value="/home", method = RequestMethod.POST)
-	public String addPatient(@ModelAttribute("patient") @Valid  Patient patient, BindingResult bindingResult, Model model)
+	public String addPatient(@ModelAttribute("patient") @Valid  PatientDTO patient, BindingResult bindingResult, Model model)
 	{
 		if(bindingResult.hasErrors())
 		{
 			model.addAttribute("genderList", genderRepository.findAll());
 			return "home";
 		}
-		Patient response = patientService.add(patient);
+		Patient response = patientService.add(patient.getPatient());
 		return "redirect:/"+response.getId();
 	}
 	

@@ -15,6 +15,7 @@ public class ExceptionHandlerController
     protected ResponseEntity<Object> handleConflict(Exception exception, WebRequest request) 
 	{
 		System.out.println("Exception Occured: "+exception);
+		exception.printStackTrace();
 		return new ResponseEntity<Object>("Internal Server error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

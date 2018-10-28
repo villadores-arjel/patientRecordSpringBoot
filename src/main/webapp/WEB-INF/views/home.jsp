@@ -15,17 +15,17 @@
 				<table>
 					<tr>
 						<td th:text="#{label.firstName}"></td>
-						<td><input th:field="*{firstName}" /></td>
-						<td><span th:errors="*{firstName}"></span></td>
+						<td><input th:field="*{patient.firstName}" /></td>
+						<td><span th:errors="*{patient.firstName}"></span></td>
 					</tr>
 					<tr>
 						<td>Enter middle name</td>
-						<td><input th:field="*{midName}" /></td>
-						<td><span th:errors="*{midName}"></span></td>
+						<td><input th:field="*{patient.midName}" /></td>
+						<td><span th:errors="*{patient.midName}"></span></td>
 					</tr>
 					<tr>
 						<td>Enter last name</td>
-						<td><input th:field="*{lastName}" /></td>
+						<td><input th:field="*{patient.lastName}" /></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -38,7 +38,7 @@
 					<tr>
 						<td>Enter Date of Birth</td>
 						<td>
-							<input type="date" name="birthDate" />
+							<input type="date" name="patient.birthDate" />
 						</td>
 					</tr>
 					<tr>
@@ -58,8 +58,8 @@
 					<tr>
 						<td>Select Gender</td>
 						<td>
-							<select th:field="*{gender}">
-								<option value="0">Select One</option>
+							<select th:field="*{patient.gender.id}">
+								<option value="">Select One</option>
 								<option th:each="gender:${genderList}" th:value="${gender.id}" th:text="${gender.description}"></option>
 							</select>
 						</td>

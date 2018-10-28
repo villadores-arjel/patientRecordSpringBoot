@@ -1,12 +1,20 @@
 package com.jelproject.patientrecord.model.dto;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import com.jelproject.patientrecord.model.Gender;
 import com.jelproject.patientrecord.model.Patient;
 
 public class PatientDTO 
 {
+	
+	
 	private Gender gender;
+	
+	@Valid
 	private Patient patient;
+	
 	public Gender getGender() {
 		return gender;
 	}

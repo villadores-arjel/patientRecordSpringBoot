@@ -56,7 +56,7 @@ public class Patient
 	
 	@NotNull(message="Select a gender")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="GENDER_ID")
+	@JoinColumn(name="GENDER_ID", nullable=false)
 	private Gender gender;
 	
 	@Column(name="EMAIL_ADDRESS")
