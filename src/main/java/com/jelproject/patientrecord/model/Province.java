@@ -1,11 +1,7 @@
 package com.jelproject.patientrecord.model;
 
-import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,26 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="GENDER")
-public class Gender implements Serializable
+@Table(name="PROVINCE")
+public class Province 
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="GENDER_ID")
+	@Column(name="PROVINCE_ID")
 	private long id;
 	
 	@Column(name="CODE")
@@ -43,9 +29,20 @@ public class Gender implements Serializable
 	private String description;
 	
 //	@JsonManagedReference
-	@JsonIgnoreProperties(value="gender", allowSetters=true)
-	@OneToMany(mappedBy = "gender", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Patient> patients = new HashSet<>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "province", fetch = FetchType.LAZY)
+	private Collection<City> cities;
+	
+	public Province()
+	{
+		
+	}
+	
+	public Province(String code, String description)
+	{
+		this.code = code;
+		this.description = description;
+	}
 
 	public long getId() {
 		return id;
@@ -69,6 +66,14 @@ public class Gender implements Serializable
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Collection<City> getCities() {
+		return cities;
+	}
+
+	public void setCities(Collection<City> cities) {
+		this.cities = cities;
 	}
 	
 	

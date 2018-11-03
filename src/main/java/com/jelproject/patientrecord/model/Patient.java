@@ -1,5 +1,7 @@
 package com.jelproject.patientrecord.model;
 
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,12 +22,23 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="PATIENT")
-public class Patient 
+public class Patient implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 //	@SequenceGenerator(name="patientSeqGen", sequenceName="PATIENT_ID_SEQ", allocationSize = 1)
 //	@GeneratedValue(generator="patientSeqGen", strategy=GenerationType.SEQUENCE)
@@ -55,6 +68,9 @@ public class Patient
 	private Long contactNumber;
 	
 	@NotNull(message="Select a gender")
+//	@JsonIgnore
+//	@JsonBackReference
+	@JsonIgnoreProperties(value="patients", allowSetters=true)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="GENDER_ID", nullable=false)
 	private Gender gender;
@@ -67,8 +83,9 @@ public class Patient
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date birthDate;
 	
-	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-	private Set<PatientRecord> record = new HashSet<>();
+	@JsonManagedReference
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Collection<PatientRecord> record;
 	
 	public Patient()
 	{
@@ -155,11 +172,11 @@ public class Patient
 		this.birthDate = birthDate;
 	}
 	
-	public Set<PatientRecord> getRecord() {
+	public Collection<PatientRecord> getRecord() {
 		return record;
 	}
 	
-	public void setRecord(Set<PatientRecord> record) {
+	public void setRecord(Collection<PatientRecord> record) {
 		this.record = record;
 	}
 	

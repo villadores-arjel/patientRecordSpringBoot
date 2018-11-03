@@ -16,6 +16,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -41,9 +42,10 @@ public class PatientRecord
 	@Size(min=1, max=100)
 	private String description;
 	
+//	@JsonIgnore
+	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "PATIENT_ID", nullable = false)
-	@JsonIgnore
 	private Patient patient;
 	
 	public PatientRecord()

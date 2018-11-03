@@ -59,7 +59,7 @@
 						<td>Select Gender</td>
 						<td>
 							<select th:field="*{patient.gender.id}">
-								<option value="">Select One</option>
+								<option value="0">Select One</option>
 								<option th:each="gender:${genderList}" th:value="${gender.id}" th:text="${gender.description}"></option>
 							</select>
 						</td>
