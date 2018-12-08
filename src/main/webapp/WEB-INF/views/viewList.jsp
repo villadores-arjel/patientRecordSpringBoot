@@ -14,7 +14,7 @@
 	<body>
 		<h1>List of Patients</h1>
 		<hr />
-		<p align="right"><a href="<c:url value="/home" />">HOME</a></p>
+		<p align="right"><a href="<c:url value="/home" />" th:href="@{/home}">HOME</a></p>
 			<div class="patients">
 				<table class="customTable">
 					<thead>
@@ -43,7 +43,28 @@
 						<td><c:out value="${ patient.birthDate }" /></td>
 					</tr>
 					</c:forEach>
+					<tbody>
+						<tr th:each="patient : ${patientList}">
+							<td th:text="${patient.id}"></td>
+							<td th:text="${patient.firstName}"></td>
+							<td th:text="${patient.midName}"></td>
+							<td th:text="${patient.lastName}"></td>
+							<td th:text="${patient.emailAdd}"></td>
+							<td th:text="${patient.address}"></td>
+							<td th:text="${patient.contactNumber}"></td>
+							<td th:text="${patient.gender.description}"></td>
+							<td th:text="${patient.birthDate}"></td>
+						</tr>
+					</tbody>
 				</table>
+				
+				<ul th:if="${pages}">
+					<li th:each="page : ${#numbers.sequence(1, pages)}">
+						<a th:href="@{/view(page=${page})}" th:text="${page}"
+						 th:classappend="${currentpage==page}?'active':''"
+						 th:disabled="${currentpage==page}"></a>
+					</li>
+				</ul>
 			</div>
 		
 	</body>

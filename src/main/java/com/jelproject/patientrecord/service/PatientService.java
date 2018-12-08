@@ -2,6 +2,9 @@ package com.jelproject.patientrecord.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.jelproject.patientrecord.model.Patient;
 import com.jelproject.patientrecord.model.PatientRecord;
 
@@ -16,4 +19,5 @@ public interface PatientService
 	public List<PatientRecord> findByRecordId(String patientId, String recordId);
 	public PatientRecord addRecord(String patientId, PatientRecord record);
 	public PatientRecord updateRecord(String patientId, String recordId, PatientRecord record);
+	public Page<Patient> findAllPaginate(Pageable pageable);
 } 

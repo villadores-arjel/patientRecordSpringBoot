@@ -3,11 +3,15 @@ package com.jelproject.patientrecord.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -74,10 +78,14 @@ public class PatientMVCController {
 	}
 	
 	@RequestMapping(value="/view", method = RequestMethod.GET)
-	public String viewAllPatients(Model model)
+	public String viewAllPatients(Model model, @RequestParam("page") Optional<Integer> page)
 	{
-		List<Patient> patients = patientService.findAll();
-		model.addAttribute("patientList", patients);
+//		List<Patient> patients = patientService.findAll();
+		int currentPage = page.orElse(1);
+		Page<Patient> patients = patientService.findAllPaginate(PageRequest.of(currentPage - 1, 1, new Sort(Sort.Direction.ASC, "id")));
+		model.addAttribute("patientList", patients.getContent());
+		model.addAttribute("pages", patients.getTotalPages());
+		model.addAttribute("currentpage", currentPage);
 		return "viewList";
 	}
 	

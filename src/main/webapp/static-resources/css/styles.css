@@ -5,6 +5,11 @@
 	width: 100%;
 }
 
+.active
+{
+	color: red;
+}
+
 .customTable
 {
 	border-collapse: collapse;
